@@ -1,0 +1,18 @@
+{
+    "contents" : "# install and load packages\n# if not install , select the packages from packages tab in bottom right corner\n\ninstall.packages(\"caret\")\nlibrary(caret)\ninstall.packages(\"e1071\")\nlibrary(e1071)\ninstall.packages(\"klaR\")\nlibrary(klaR)\ninstall.packages(\"RWeka\")\nlibrary(RWeka)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"cluster\")\nlibrary(cluster)\n\ninstall.packages(\"oblique.tree\")\nlibrary(oblique.tree)\n\n\n\ndivideDataset<-function(data)\n{\n  set.seed(5469)\n  data = read.csv(\"life_expectancy.csv\")\n  dim(data) \n  \n  indexes = sample(1:nrow(data), size=0.8*nrow(data))\n  \n  # Split data into train and test\n  train = data[indexes,]\n  dim(train) \n  test = data[-indexes,]\n  dim(test)\n  \n  dataset<-list(train,test)\n  return(dataset)\n}\n\n\n\n\"myOblique<-function(train)\n{\n  \n  modelOblique <- oblique.tree(Continent~., data = test ,oblique.splits = \n                                 only)\n  \n  return(modelOblique)\n}\n\"\n\"myObliquePredictor<-function(modelOblique)\n{\n  plot(modelOblique,test)\n  tree(modelOblique, test)\n  predictions <- predict(modelOblique, test)\n  table(predictions)\n  summary(predictions)\n  text(predictions)\n  #confusionMatrix(predictions,test)\n  \n  \n}\"\n\n\"myObliqueTrain<-function(modelOblique)\n{\n  predictions <- predict(modelOblique, train)\n  summary(predictions)\n  # confusionMatrix(predictions,train)\n}\"\n\n\n\n#divideDataset(read.csv(\"life_expectancy.csv\"))      #calling divide datasets\n\n#modelOblique=myOblique(train =train) #training Oblique model\n#myObliquePredictor(modelOblique = modelOblique)       #Making prediction on testing data for final table\n#myObliqueTrain(modelOblique = modelOblique)        #Performance of Oblique on Training data.Code is commented,please remove comment to run it.\n",
+    "created" : 1444600491954.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2127695046",
+    "id" : "C0C189E2",
+    "lastKnownWriteTime" : 1444607371,
+    "path" : "~/Documents/Life_Expantancy_project/Oblique_life.R",
+    "project_path" : "Oblique_life.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

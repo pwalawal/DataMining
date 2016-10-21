@@ -1,0 +1,18 @@
+{
+    "contents" : "# install and load packages\n# if not install , select the packages from packages tab in bottom right corner\n\ninstall.packages(\"caret\")\nlibrary(caret)\ninstall.packages(\"e1071\")\nlibrary(e1071)\ninstall.packages(\"klaR\")\nlibrary(klaR)\ninstall.packages(\"RWeka\")\nlibrary(RWeka)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"cluster\")\nlibrary(cluster)\n\n\ndivideDataset<-function(data)\n{\n  set.seed(5469)\n  data = read.csv(\"life_expectancy.csv\")\n  dim(data) \n  \n  indexes = sample(1:nrow(data), size=0.8*nrow(data))\n  \n  # Split data into train and test\n  train = data[indexes,]\n  dim(train) \n  test = data[-indexes,]\n  dim(test)\n  \n  dataset<-list(train,test)\n  return(dataset)\n}\n\n\n\nmyC45<-function(train)\n{\n  \n  mode <- J48(Continent~., train)\n  return(mode)\n}\n\nmyC45Predictor<-function(mode)     #shows performance on test data...used for final table\n{\n  predictions <- predict(mode, test[,1:7])\n  confusionMatrix(predictions, test$Continent)\n}\n\nmyC45Train<-function(mode)          #shows performance on training data...used to show details of classification\n{\n  predictions <- predict(mode, train[,1:7])\n  confusionMatrix(predictions, train$Continent)\n}\n\n\ndivideDataset(read.csv(\"life_expectancy.csv\"))                #calling divide datasets\nmode=myC45(train =train )         #training C45 model\n\nmyC45Predictor(mode = mode)       #Making prediction on testing data for final table\nmyC45Train(mode = mode)           #Performance of C45 on Training data.Code is commented,please remove comment to run it.\n",
+    "created" : 1444589322846.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "990223327",
+    "id" : "BE611F42",
+    "lastKnownWriteTime" : 1444600292,
+    "path" : "~/Documents/Life_Expantancy_project/C45_life.R",
+    "project_path" : "C45_life.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "# install and load packages\n# if not install , select the packages from packages tab in bottom right corner\n\ninstall.packages(\"caret\")\nlibrary(caret)\ninstall.packages(\"e1071\")\nlibrary(e1071)\ninstall.packages(\"klaR\")\nlibrary(klaR)\ninstall.packages(\"RWeka\")\nlibrary(RWeka)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"cluster\")\nlibrary(cluster)\ninstall.packages(\"ROCR\")\nlibrary(ROCR)\n\n\ndivideDataset<-function(data)\n{\n  set.seed(5469)\n  data = iris\n  dim(data) \n  \n  indexes = sample(1:nrow(data), size=0.8*nrow(data))\n  \n  # Split data into train and test\n  train = data[indexes,]\n  dim(train) \n  test = data[-indexes,]\n  dim(test)\n  \n  dataset<-list(train,test)\n  return(dataset)\n}\n\n\nmyRipper<-function(train)\n{\n  \n  modelJRip <- JRip(Species~., train)\n \n  return(modelJRip)\n}\n\nmyRipperPredictor<-function(modelJRip)\n{\n  predictions <- predict(modelJRip, test[,1:4])\n  \n  confusionMatrix(predictions, test$Species)\n}\n\nmyRipperTrain<-function(modelJRip)\n{\n  predictions <- predict(modelJRip, train[,1:4])\n  confusionMatrix(predictions, train$Species)\n}\n\n  \n  divideDataset(iris)               #calling divide datasets\n  modelJRip=myRipper(train =train )         #training Ripper model\n  myRipperPredictor(modelJRip = modelJRip)       #Making prediction on testing data for final table\n  myRipperTrain(modelJRip = modelJRip)           #Performance of Ripper on Training data.Code is commented,please remove comment to run it.\n  ",
+    "created" : 1444542424101.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2354333747",
+    "id" : "2BA0387B",
+    "lastKnownWriteTime" : 1444627618,
+    "path" : "~/Documents/Iris_project/Ripper.R",
+    "project_path" : "Ripper.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

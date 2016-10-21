@@ -1,0 +1,18 @@
+{
+    "contents" : "# install and load packages\n# if not install , select the packages from packages tab in bottom right corner\n\ninstall.packages(\"caret\")\nlibrary(caret)\ninstall.packages(\"e1071\")\nlibrary(e1071)\ninstall.packages(\"klaR\")\nlibrary(klaR)\ninstall.packages(\"RWeka\")\nlibrary(RWeka)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"cluster\")\nlibrary(cluster)\n\n#reading datasets and dividing into training and testing sets\ndivideDataset<-function(data)\n{\n  set.seed(5469)\n  data = read.csv(\"life_expectancy.csv\")\n  dim(data) \n  \n  indexes = sample(1:nrow(data), size=0.8*nrow(data))\n  \n  # Split data into train and test\n  train = data[indexes,]\n  dim(train) \n  test = data[-indexes,]\n  dim(test)\n  \n  #dataset<-list(train,test)\n  cell_data <-c('train','test') \n  dataset <- factor(cell_data) \n  \n  return(dataset)\n}\n\nmykNN<-function(train,test)    #kNN classifier\n{\n  \n  modelkNN <- IBk(Continent~.,train,control = Weka_control(K = 20, X = TRUE))     #k is taken as 3. Can be taken as 4, 5, 6 etc.\n\n  return(modelkNN)\n}\n\nmykNNPredictor<-function(modelkNN)       #shows performance on test data...used for final table\n{\n  kNNpred<-predict(modelkNN,test)\n  summary(kNNpred)\n  \n  confusionMatrix(kNNpred,test$Continent)\n  \n}\n\n\n\n\nmykNNPredictorTrain<-function(modelkNNTrain)    #shows performance on training data...used to show details of classification\n{\n  \n  kNNpred<-predict(modelkNN,train)\n  summary(kNNpred)\n  \n  confusionMatrix(kNNpred,train$Continent)\n  \n}\n\n\n\ndivideDataset(read.csv(\"life_expectancy.csv\"))     #calling divide datasets\nmodelkNN=mykNN(train =train,test =test )        #training kNN model\nmykNNPredictor(modelkNN =modelkNN )             #Making prediction on testing data for final table\n mykNNPredictorTrain(modelkNNTrain =  modelkNNTrain)       #Performance of kNN on Training data.Please remove comments from code to run",
+    "created" : 1444587093286.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2735924416",
+    "id" : "94AABEBD",
+    "lastKnownWriteTime" : 1444600440,
+    "path" : "~/Documents/Life_Expantancy_project/kNN_life.R",
+    "project_path" : "kNN_life.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "# install and load packages\n# if not install , select the packages from packages tab in bottom right corner\n\ninstall.packages(\"caret\")\nlibrary(caret)\ninstall.packages(\"e1071\")\nlibrary(e1071)\ninstall.packages(\"klaR\")\nlibrary(klaR)\ninstall.packages(\"RWeka\")\nlibrary(RWeka)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"cluster\")\nlibrary(cluster)\ninstall.packages(\"ROCR\")\nlibrary(ROCR)\n\n\ndivideDataset<-function(data)\n{\n  set.seed(5469)\n  data = iris\n  dim(data) \n  \n  indexes = sample(1:nrow(data), size=0.8*nrow(data))\n  \n  # Split data into train and test\n  train = data[indexes,]\n  dim(train) \n  test = data[-indexes,]\n  dim(test)\n  \n  dataset<-list(train,test)\n  return(dataset)\n}\n\n\nmyC45<-function(train)\n{\n  \n   mode <- J48(Species~., train)\n   return(mode)\n}\n\nmyC45Predictor<-function(mode)\n{\n  predictions <- predict(mode, test[,1:4])\n  confusionMatrix(predictions, test$Species)\n}\n\nmyC45Train<-function(mode)\n{\n  predictions <- predict(mode, train[,1:4])\n  confusionMatrix(predictions, train$Species)\n}\n\n\ndivideDataset(iris)               #calling divide datasets\nmode=myC45(train =train )         #training C45 model\n\nmyC45Predictor(mode = mode)       #Making prediction on testing data for final table\nmyC45Train(mode = mode)           #Performance of C45 on Training data.Code is commented,please remove comment to run it.\n",
+    "created" : 1444537533368.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2269130989",
+    "id" : "30B97423",
+    "lastKnownWriteTime" : 1444627620,
+    "path" : "~/Documents/Iris_project/C45.R",
+    "project_path" : "C45.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

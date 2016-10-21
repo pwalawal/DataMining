@@ -1,0 +1,18 @@
+{
+    "contents" : "# install and load packages\n# if not install , select the packages from packages tab in bottom right corner\n\ninstall.packages(\"caret\")\nlibrary(caret)\ninstall.packages(\"e1071\")\nlibrary(e1071)\ninstall.packages(\"klaR\")\nlibrary(klaR)\ninstall.packages(\"RWeka\")\nlibrary(RWeka)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"cluster\")\nlibrary(cluster)\ninstall.packages(\"ROCR\")\nlibrary(ROCR)\n\n#reading datasets and dividing into training and testing sets\ndivideDataset<-function(data)\n{\n  set.seed(5469)\n  data = iris\n  dim(data) \n  \n  indexes = sample(1:nrow(data), size=0.8*nrow(data))\n  \n  # Split data into train and test\n  train = data[indexes,]\n  dim(train) \n  test = data[-indexes,]\n  dim(test)\n  \n  dataset<-list(train,test)\n  return(dataset)\n}\n\nmyNaiveBayes<-function(train)\n{\nmodel <- naiveBayes(train[,1:4], train[,5])\n\nreturn(model)\n}\n\nmyNaiveBayesPredictor<-function(model)\n{\npredictions <- predict(model, test[,1:4])\nconfusionMatrix(predictions, test$Species)\n}\n\nmyNaiveBayesPredictorTrain<-function(model)\n{\n  predictions <- predict(model, train[,1:4])\n confusionMatrix(predictions, train$Species)\n}\n\n\ndivideDataset(iris)     #calling divide datasets\nmodel=myNaiveBayes(train =train )         #training naiveBayes model\nmyNaiveBayesPredictor(model = model)       #Making prediction on testing data for final table\n myNaiveBayesPredictorTrain(model = model)  #Performance of naiveBayes on Training data",
+    "created" : 1444527536882.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1537186938",
+    "id" : "F8E1E1B4",
+    "lastKnownWriteTime" : 1444627622,
+    "path" : "~/Documents/Iris_project/naiveBayes.R",
+    "project_path" : "naiveBayes.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "# install and load packages\n# if not install , select the packages from packages tab in bottom right corner\n\ninstall.packages(\"caret\")\nlibrary(caret)\ninstall.packages(\"e1071\")\nlibrary(e1071)\ninstall.packages(\"klaR\")\nlibrary(klaR)\ninstall.packages(\"RWeka\")\nlibrary(RWeka)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"cluster\")\nlibrary(cluster)\ninstall.packages(\"ROCR\")\nlibrary(ROCR)\n\ninstall.packages(\"oblique.tree\")\nlibrary(oblique.tree)\ndivideDataset<-function(data)\n{\n  set.seed(5469)\n  data = iris\n  dim(data) \n  \n  indexes = sample(1:nrow(data), size=0.8*nrow(data))\n  \n  # Split data into train and test\n  train = data[indexes,]\n  dim(train) \n  test = data[-indexes,]\n  dim(test)\n  \n  dataset<-list(train,test)\n  return(dataset)\n}\n\n\nmyOblique<-function(train)\n{\n  \n  modelOblique <- oblique.tree(Species~., data = train ,oblique.splits = \n                                 \"on\")\n  summary(modelOblique)\n  textplot(modelOblique)\n  text(modelOblique)\n  return(modelOblique)\n}\n\nmyObliquePredictor<-function(modelOblique)\n{\n  \n  predictionsOblique <- predict(modelOblique, test)\n  summary(predictionsOblique)\n  #confusionMatrix(predictionsOblique,test[,5])\n  \n  \n}\n\nmyObliqueTrain<-function(modelOblique)\n{\n  predictions <- predict(modelOblique, train)\n  summary(predictions)\n  \n#confusionMatrix(predictions,train)\n}\n\n  \n  divideDataset(iris)      #calling divide datasets\n  \n  modelOblique=myOblique(train =train) #training Oblique model\n  myObliquePredictor(modelOblique = modelOblique)       #Making prediction on testing data for final table\n  myObliqueTrain(modelOblique = modelOblique)           #Performance of Oblique on Training data.Code is commented,please remove comment to run it.\n  ",
+    "created" : 1444546787557.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "552040256",
+    "id" : "4FE9607F",
+    "lastKnownWriteTime" : 1444627616,
+    "path" : "~/Documents/Iris_project/Oblique.R",
+    "project_path" : "Oblique.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

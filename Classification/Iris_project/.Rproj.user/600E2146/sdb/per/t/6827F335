@@ -1,0 +1,18 @@
+{
+    "contents" : "# install and load packages\n# if not install , select the packages from packages tab in bottom right corner\n\ninstall.packages(\"caret\")\nlibrary(caret)\ninstall.packages(\"e1071\")\nlibrary(e1071)\ninstall.packages(\"klaR\")\nlibrary(klaR)\ninstall.packages(\"RWeka\")\nlibrary(RWeka)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"cluster\")\nlibrary(cluster)\ninstall.packages(\"ROCR\")\nlibrary(ROCR)\n#reading datasets and dividing into training and testing sets\ndivideDataset<-function(data)\n{\n  set.seed(5469)\n  data = iris\n  dim(data) \n  \n  indexes = sample(1:nrow(data), size=0.8*nrow(data))\n  \n  # Split data into train and test\n  train = data[indexes,]\n  dim(train) \n  test = data[-indexes,]\n  dim(test)\n  \n  dataset<-list(train,test)\n  return(dataset)\n}\n\nmykNN<-function(train,test)    #kNN classifier\n{\n  \n  modelkNN <- knn(train=train[,1:4],test=test[,1:4],cl=train[,5],k=3,prob = TRUE)     #k is taken as 3. Can be taken as 4, 5, 6 etc.\n  return(modelkNN)\n}\n\nmykNNPredictor<-function(modelkNN)\n{\n  \n  confusionMatrix(modelkNN, test$Species)\n}\n\n\nmykNNTrain<-function(train,test)\n {\n  \n modelkNNTrain <- knn(train=train[,1:4],test=train[,1:4],cl=train[,5],k=3,prob = TRUE)\n   return(modelkNNTrain)\n }\n\nmykNNPredictorTrain<-function(modelkNNTrain)\n{\n  \n  confusionMatrix(modelkNNTrain, train$Species)\n  \n}\n\n\n\ndivideDataset(iris)     #calling divide datasets\nmodelkNN=mykNN(train =train,test =test )        #training kNN model\nmykNNPredictor(modelkNN =modelkNN )             #Making prediction on testing data for final table\n\nmodelkNNTrain=mykNNTrain(train =train,test =test )        #training kNN model for train dataset.Please remove comments from code to run.\nmykNNPredictorTrain(modelkNNTrain =  modelkNNTrain)       #Performance of kNN on Training data.Please remove comments from code to run",
+    "created" : 1444533174795.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "988733177",
+    "id" : "6827F335",
+    "lastKnownWriteTime" : 1444611036,
+    "path" : "~/Documents/Iris_project/kNN.R",
+    "project_path" : "kNN.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "# install and load packages\n# if not install , select the packages from packages tab in bottom right corner\n\ninstall.packages(\"caret\")\nlibrary(caret)\ninstall.packages(\"e1071\")\nlibrary(e1071)\ninstall.packages(\"klaR\")\nlibrary(klaR)\ninstall.packages(\"RWeka\")\nlibrary(RWeka)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"cluster\")\nlibrary(cluster)\n\n#reading datasets and dividing into training and testing sets\ndivideDataset<-function(data)\n{\n  set.seed(5469)\n  data = read.csv(\"life_expectancy.csv\")\n  dim(data) \n  \n  indexes = sample(1:nrow(data), size=0.8*nrow(data))\n  \n  # Split data into train and test\n  train = data[indexes,]\n  dim(train) \n  test = data[-indexes,]\n  dim(test)\n  \n  dataset<-list(train,test)\n  return(dataset)\n}\n\nmyNaiveBayes<-function(train)\n{\n  model <- naiveBayes(train[,1:7], train[,8])\n  \n  return(model)\n}\n\nmyNaiveBayesPredictor<-function(model)  #shows performance on test data...used for final table\n{\n  predictions <- predict(model, test[,1:7])\n  confusionMatrix(predictions, test$Continent)\n}\n\nmyNaiveBayesPredictorTrain<-function(model)  #shows performance on training data...used to show details of classification\n{\n  predictions <- predict(model, train[,1:7])\n  confusionMatrix(predictions, train$Continent)\n}\n\n  \n  divideDataset(read.csv(\"life_expectancy.csv\"))     #calling divide datasets\n  model=myNaiveBayes(train =train )         #training naiveBayes model\n  myNaiveBayesPredictor(model = model)       #Making prediction on testing data for final table\n  myNaiveBayesPredictorTrain(model = model)  #Performance of naiveBayes on Training data",
+    "created" : 1444588801382.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3255790547",
+    "id" : "798B23C6",
+    "lastKnownWriteTime" : 1444600187,
+    "path" : "~/Documents/Life_Expantancy_project/naiveBayes_Life.R",
+    "project_path" : "naiveBayes_Life.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
