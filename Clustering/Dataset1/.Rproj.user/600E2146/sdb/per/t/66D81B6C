@@ -1,0 +1,18 @@
+{
+    "contents" : "install.packages(\"ggplot2\")\nlibrary(ggplot2)\ninstall.packages(\"gdata\")\nlibrary(gdata)\ninstall.packages(\"gplots\")\nlibrary(gplots)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"datasets\")\nlibrary(datasets)\ninstall.packages(\"Matrix\")\nlibrary(Matrix)\ninstall.packages(\"MatrixModels\")\nlibrary(MatrixModels)\ninstall.packages(\"cluster\")\nlibrary(cluster)\ninstall.packages(\"fpc\")\nlibrary(fpc)\ninstall.packages(\"rgl\")\nlibrary(rgl)\ninstall.packages(\"scatterplot3d\")\nlibrary(scatterplot3d)\n\n\n\ndatasetCsv=read.csv(\"dataset1.csv\")\ndata <- datasetCsv[,1:3]\n# Excluded the cluster label , as it is only given to check performance of our method\n#View(data)\n\n\n\n\nMyDistanceFun <- function(data)  \n{ \n  data$x <- data$x * 4\n  data$y <- data$y * 2\n  adata<-as.matrix(data)\n  userDistanceMatrix <- dist(adata) \n  \n  return(userDistanceMatrix)\n}\n\n\n\n#userDistanceMatrix <- dist(adata) \n#print(userDistanceMatrix)\n\n\n\nuserDistanceCluster <- kmeans(MyDistanceFun(data), 8) \n#calculating k means clustering for user defined distance matrix\n\n\n\nnewdataset <- data.frame(dataset, userDistanceCluster$cluster)\n# Appending Clusters to dataset to get clear plots of cluster\n\nplot(newdataset, col = userDistanceCluster$cluster)\n#displaying clusters of graph\nclusplot(newdataset, userDistanceCluster$cluster, color=TRUE, shade=TRUE, lines=0)\n#This gives 2d plot of average hierarchail clustering\n\n\n\n\n\nscatterplot3d(datasetCsv, color=datasetCsv$cluster)\n#This gives 3d plot of of original dataset with given cluster label from scatterplot3d package.\nscatterplot3d(newdataset,color=userDistanceCluster$cluster)\n#This gives 3d plot of complete hierarchail clustering from scatterplot3d package.\n\n\n#Detaching packages\n\n\ndetach(\"package:ggplot2\", unload=TRUE)\ndetach(\"package:gdata\", unload=TRUE)\ndetach(\"package:cluster\", unload=TRUE)\ndetach(\"package:gplots\", unload=TRUE)\ndetach(\"package:Matrix\", unload=TRUE)\ndetach(\"package:MatrixModels\", unload=TRUE)\ndetach(\"package:datasets\", unload=TRUE)\ndetach(\"package:rgl\", unload=TRUE)\ndetach(\"package:fpc\", unload=TRUE)\ndetach(\"package:scatterplot3d\", unload=TRUE)\ndetach(\"package:cluster\", unload=TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "created" : 1448146758323.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1307514152",
+    "id" : "66D81B6C",
+    "lastKnownWriteTime" : 1448256298,
+    "path" : "~/Documents/Dataset1/OwnMethod.R",
+    "project_path" : "OwnMethod.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

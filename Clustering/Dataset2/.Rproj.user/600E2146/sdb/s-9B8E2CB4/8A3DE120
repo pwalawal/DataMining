@@ -1,0 +1,18 @@
+{
+    "contents" : "install.packages(\"ggplot2\")\nlibrary(ggplot2)\ninstall.packages(\"gdata\")\nlibrary(gdata)\ninstall.packages(\"gplots\")\nlibrary(gplots)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"datasets\")\nlibrary(datasets)\ninstall.packages(\"Matrix\")\nlibrary(Matrix)\ninstall.packages(\"MatrixModels\")\nlibrary(MatrixModels)\ninstall.packages(\"cluster\")\nlibrary(cluster)\ninstall.packages(\"fpc\")\nlibrary(fpc)\ninstall.packages(\"e1071\")\nlibrary(e1071)\ninstall.packages(\"scatterplot3d\")\nlibrary(scatterplot3d)\ninstall.packages(\"MASS\")\nlibrary(MASS)\n\n\ndatasetCsv=read.csv(\"dataset2.csv\")\ndataset <- datasetCsv[,2:6]\n# Excluded the cluster label , as it is only given to check performance of our method\n\n\n#datasetbind<-rbind(dataset$x, dataset$y, dataset$z, dataset$w, dataset$class)\n#largecluster<-cmeans(datasetbind,2,20,verbose=FALSE,dist = \"euclidean\",method=\"cmeans\")\n#Cluster found after binding the 4 dimensions given in dataset\n\n\nlargecluster<-cmeans(dataset,2,20,verbose=FALSE,dist = \"euclidean\",method=\"cmeans\")\nprint(largecluster)\nprint(largecluster$size)\n#print(largecluster$cluster)\n\n\n\n\nplot(dataset, col=largecluster$cluster)\n#2d plot of cluster.\n#scatterplot3d(largecluster$membership,color=largecluster$cluster,angle=60, scale.y=0.75)\n#This gives 3d plot of cmeans clustering from scatterplot3d package.\n\n\n#Detaching packages\n\n\ndetach(\"package:ggplot2\", unload=TRUE)\ndetach(\"package:gdata\", unload=TRUE)\ndetach(\"package:cluster\", unload=TRUE)\ndetach(\"package:gplots\", unload=TRUE)\ndetach(\"package:Matrix\", unload=TRUE)\ndetach(\"package:MatrixModels\", unload=TRUE)\ndetach(\"package:datasets\", unload=TRUE)\ndetach(\"package:rgl\", unload=TRUE)\ndetach(\"package:fpc\", unload=TRUE)\ndetach(\"package:scatterplot3d\", unload=TRUE)\ndetach(\"package:cluster\", unload=TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "created" : 1448149972641.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "31449337",
+    "id" : "8A3DE120",
+    "lastKnownWriteTime" : 1448263943,
+    "path" : "~/Documents/Dataset2/part3.R",
+    "project_path" : "part3.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

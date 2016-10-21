@@ -1,0 +1,18 @@
+{
+    "contents" : "install.packages(\"ggplot2\")\nlibrary(ggplot2)\ninstall.packages(\"gdata\")\nlibrary(gdata)\ninstall.packages(\"gplots\")\nlibrary(gplots)\ninstall.packages(\"cluster\")\nlibrary(cluster)\ninstall.packages(\"datasets\")\nlibrary(datasets)\ninstall.packages(\"Matrix\")\nlibrary(Matrix)\ninstall.packages(\"MatrixModels\")\nlibrary(MatrixModels)\ninstall.packages(\"cluster\")\nlibrary(cluster)\ninstall.packages(\"fpc\")\nlibrary(fpc)\ninstall.packages(\"rgl\")\nlibrary(rgl)\ninstall.packages(\"scatterplot3d\")\nlibrary(scatterplot3d)\ninstall.packages(\"sna\")\nlibrary(sna)\ninstall.packages(\"igraph\")\nlibrary(igraph)\n\n\ndatasetCsv=read.csv(\"dataset1.csv\")\ndataset <- datasetCsv[,1:3]\n# Excluded the cluster label , as it is only given to check performance of our method\n\n\nepgraph<-epsGraph(dataset, eps = 1, weighted = FALSE, dist=FALSE)\n#representing dataset as graph\n\ngraphcluster<-kcores(epgraph, mode = \"graph\", diag = TRUE,ignore.eval = FALSE)\n#Using kcores algorithm for graph clustering\n\n\nnewdataset <- data.frame(dataset, graphcluster)\n\nplot(newdataset, col = graphcluster)\n#displaying clusters of graph\nclusplot(newdataset, graphcluster, color=TRUE, shade=TRUE, lines=0)\n#This gives 2d plot of graph clustering\n\n\nscatterplot3d(datasetCsv, color=datasetCsv$cluster)\n#This gives 3d plot of of original dataset with given cluster label from scatterplot3d package.\nscatterplot3d(newdataset,color=graphcluster)\n#This gives 3d plot of graph clustering from scatterplot3d package.\n\n#Detaching packages\ndetach(\"package:ggplot2\", unload=TRUE)\ndetach(\"package:gdata\", unload=TRUE)\ndetach(\"package:cluster\", unload=TRUE)\ndetach(\"package:ROCR\", unload=TRUE)\ndetach(\"package:gplots\", unload=TRUE)\ndetach(\"package:Matrix\", unload=TRUE)\ndetach(\"package:MatrixModels\", unload=TRUE)\ndetach(\"package:datasets\", unload=TRUE)\ndetach(\"package:rgl\", unload=TRUE)\ndetach(\"package:fpc\", unload=TRUE)\ndetach(\"package:scatterplot3d\", unload=TRUE)\ndetach(\"package:cluster\", unload=TRUE)\ndetach(\"package:sna\", unload=TRUE)\ndetach(\"package:igraph\", unload=TRUE)",
+    "created" : 1448135892755.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2210340553",
+    "id" : "9483B2E5",
+    "lastKnownWriteTime" : 1448238966,
+    "path" : "~/Documents/Dataset1/graph.R",
+    "project_path" : "graph.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "install.packages(\"ggplot2\")\nlibrary(ggplot2)\ninstall.packages(\"gdata\")\nlibrary(gdata)\ninstall.packages(\"gplots\")\nlibrary(gplots)\ninstall.packages(\"class\")\nlibrary(class)\ninstall.packages(\"datasets\")\nlibrary(datasets)\ninstall.packages(\"Matrix\")\nlibrary(Matrix)\ninstall.packages(\"MatrixModels\")\nlibrary(MatrixModels)\ninstall.packages(\"cluster\")\nlibrary(cluster)\ninstall.packages(\"fpc\")\nlibrary(fpc)\ninstall.packages(\"rgl\")\nlibrary(rgl)\ninstall.packages(\"scatterplot3d\")\nlibrary(scatterplot3d)\n\n\n\ndatasetCsv=read.csv(\"dataset1.csv\")\ndataset <- datasetCsv[,1:3]\n# Excluded the cluster label , as it is only given to check performance of our method\n\n\n# Average Heirarchial Clustering for distance based clustering\ndistanceMatrix <- dist(dataset, method = \"euclidean\") \n# calculating distance matrix for distance based clustering\ndistanceCluster <- hclust(distanceMatrix, method=\"average\") \n\nplot(distanceCluster) \n# display dendogram for centroid heirarchial clustering\n\n\nrect.hclust(distanceCluster, k=8, border=\"blue\")\n# display dendogram for centroid heirarchial clustering with respect to 8 cluster\n\n\nhcluster <- cutree(distanceCluster, k=8) \n# 8 clusters as given in data\n\nnewdataset <- data.frame(dataset, hcluster)\n# Appending Clusters to dataset to get clear plots of cluster\n\n\nplot(newdataset, col =  hcluster)\n#displaying clusters of graph\nclusplot(newdataset, hcluster, color=TRUE, shade=TRUE, lines=0)\n#This gives 2d plot of average hierarchail clustering\n\n\nscatterplot3d(datasetCsv, color=datasetCsv$cluster)\n#This gives 3d plot of of original dataset with given cluster label from scatterplot3d package.\nscatterplot3d(newdataset,color=hcluster)\n#This gives 3d plot of average hierarchail clustering from scatterplot3d package.\n\n\n#Detaching packages\n\n\ndetach(\"package:ggplot2\", unload=TRUE)\ndetach(\"package:gdata\", unload=TRUE)\ndetach(\"package:cluster\", unload=TRUE)\ndetach(\"package:gplots\", unload=TRUE)\ndetach(\"package:Matrix\", unload=TRUE)\ndetach(\"package:MatrixModels\", unload=TRUE)\ndetach(\"package:datasets\", unload=TRUE)\ndetach(\"package:rgl\", unload=TRUE)\ndetach(\"package:fpc\", unload=TRUE)\ndetach(\"package:scatterplot3d\", unload=TRUE)\ndetach(\"package:cluster\", unload=TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "created" : 1448084047379.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2364874823",
+    "id" : "67288B4F",
+    "lastKnownWriteTime" : 1448238979,
+    "path" : "~/Documents/Dataset1/distance.R",
+    "project_path" : "distance.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
